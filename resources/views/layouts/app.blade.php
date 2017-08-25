@@ -5,27 +5,66 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>@yield('title', 'Laratter, by ErSulba')</title>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <!-- Scripts -->
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!};
+    </script>
 </head>
 <body>
-<div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @if (Auth::check())
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ url('/login') }}">Login</a>
-                <a href="{{ url('/register') }}">Register</a>
-            @endif
-        </div>
-    @endif
-
     <div class="container">
-        @yield('content')
+        <!-- Navbar -->
+        <nav class="navbar navbar-toggleable-md navbar-light  bg-faded ">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="/" >{{ config('app.name', 'Laravel') }}</a>
+        <!-- Right Side of Navbar -->
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <!-- Authentication Links -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link"href="/">Inicio <span class="sr-only">(current)</span></a>
+                </li>
+                @if (Auth::guest())
+                <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Entrar</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Registrarse</a></li>
+                @else
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ Auth::user()->name }}<span class="caret"></span>
+                    </a>
+
+                    <div class="dropdown-menu" role="menu">
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> Salir </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                        </form>
+
+                    </div>
+                </li>
+                @endif
+
+            </ul>
+
+        </div>
+    </nav>
+
+    @yield('content')
     </div>
-</div>
+
+<!-- Scripts -->
+<script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 </body>
 </html>
