@@ -58,4 +58,9 @@
                     </form>
     </div>
 </div>
+<div class="row">
+    <a href="/auth/facebook" class="btn btn-primary">
+        Login con facebook
+    </a>
+</div>
 @endsection
