@@ -17,10 +17,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property \Carbon\Carbon|null $updated_at
  * @property string $username
  * @property string|null $avatar
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $followers
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $follows
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Message[] $messages
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  */
 
 class User extends Authenticatable
