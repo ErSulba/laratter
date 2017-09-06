@@ -1,0 +1,45 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+/**
+ * App\Conversation
+ *
+ * @property int $id
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\PrivateMessage[] $privateMessages
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
+ */
+
+class Conversation extends Model
+{
+    public function users()
+    {
+    	return $this->belongsToMany(User::class);
+    }
+
+    public function privateMessages()
+    {
+    	return $this->hasMany(PrivateMessage::class)->orderBy('created_at', 'desc');
+    }
+
+    public static function between(User $user, User $other)
+    {
+    	$query= Conversation::whereHas('users', function ($query) use($user){
+    		$query->where('user_id', $user->id);
+	    })->whereHas('users', function ($query) use ($other){
+	    	$query->where('user_id', $other->id);
+	    });
+
+    	$conversation = $query->firstOrCreate([]);
+
+    	$conversation->users()->sync([
+    		$user->id, $other->id
+	    ]);
+    	return $conversation;
+    }
+}
+
