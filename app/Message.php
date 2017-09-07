@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 /**
  * App\Message
@@ -25,6 +26,7 @@ use Illuminate\Database\Eloquent\Model;
 	class Message extends Model
 	{
 	// messages
+		use Searchable;
 		protected $guarded = [];
 		public  function user()
         {
