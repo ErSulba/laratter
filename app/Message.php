@@ -41,4 +41,11 @@ use Laravel\Scout\Searchable;
 
 	        return \Storage::disk('public')->url($image);
         }
+
+        public function toSearchableArray()
+        {
+        	$this->load('user');
+
+        	return $this->toArray();
+        }
 	}
