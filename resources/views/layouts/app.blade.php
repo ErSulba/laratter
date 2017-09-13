@@ -23,7 +23,7 @@
 <body>
 <div id="app" class="container">
     <!-- Navbar -->
-    <nav class="navbar navbar-toggleable-md navbar-light  bg-faded ">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -42,6 +42,7 @@
                     </form>
                 </li>
             </ul>
+
             <!-- Authentication Links -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
@@ -52,12 +53,20 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Registrarse</a></li>
                 @else
                     <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                            Notificaciones <span class="caret"></span>
+                        </a>
+                        <notifications :user="{{ Auth::user()->id }}"></notifications>
+                    </li>
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ Auth::user()->name }}<span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu" role="menu">
+                            <a class="dropdown-item" href="/{{ Auth::user()->username }}"> Ver perfil</a>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> Salir </a>
+
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}
