@@ -18,10 +18,15 @@
                 <input type="text" name="message" class="form-control" placeholder="Qué estás pensando?">
                 @if ($errors->has('message'))
                     @foreach ($errors->get('message') as $error)
-                        <div class="form-control-feedback">{{ $error }}</div>
+                        <div class="alert-danger">{{ $error }}</div>
                     @endforeach
                 @endif
                 <input type="file" class="form-control-file" name="image">
+                @if ($errors->has('image'))
+                    @foreach ($errors->get('image') as $error)
+                        <div class="alert-danger">{{ $error }}</div>
+                    @endforeach
+                @endif
             </div>
         </form>
     </div>

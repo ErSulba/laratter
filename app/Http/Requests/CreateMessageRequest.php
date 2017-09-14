@@ -24,14 +24,16 @@ class CreateMessageRequest extends FormRequest
     public function rules()
     {
         return [
-	        'message'   =>  ['required', 'max:160']
+	        'message'   =>  ['required', 'max:160'],
+	        'image'     =>  ['required']
         ];
     }
     public function messages()
     {
 	    return [
 		    'message.required' => 'Por Favor, Escribe tu mensaje.',
-		    'message.max'   =>  'El mensaje no puede superar los 160 caracteres'
+		    'message.max'   =>  'El mensaje no puede superar los 160 caracteres',
+		    'image.required' => 'Por favor selecciona una imagen'
 	    ];
     }
 }
