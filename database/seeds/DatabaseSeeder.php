@@ -11,8 +11,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        //creando 50 usarios
         $users = factory(App\User::class, 50)->create();
 
+        //por cada usuario se seguiran a 10 y creara 20 mensaje y cada mensaje llevara un numero al azar de comentarios
         $users->each(function(App\User $user) use ($users) {
            $messages = factory(App\Message::class)
                 ->times(20)

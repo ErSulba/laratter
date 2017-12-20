@@ -12,6 +12,8 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+
+//Users here
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
@@ -25,6 +27,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
+//message here
 $factory->define(App\Message::class, function (Faker\Generator $faker){
 	return[
 		'content'   =>  $faker->realText(random_int(20,160)),
@@ -34,6 +37,7 @@ $factory->define(App\Message::class, function (Faker\Generator $faker){
 	];
 });
 
+//Responses to messages posts
 $factory->define(App\Response::class, function (Faker\Generator $faker){
 	return [
 		'message' => $faker->words('3',true),
