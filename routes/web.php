@@ -16,7 +16,9 @@ Route::get('/', 'PagesController@home');
 Route::get('/messages/{message}', 'MessagesController@show');
 
 Auth::routes();
-
+/**
+ *  Facebook Login Rules
+ */
 Route::get('auth/facebook', 'SocialAuthController@facebook');
 Route::get('/auth/facebook/callback', 'SocialAuthController@callback');
 Route::post('auth/facebook/register', 'SocialAuthController@register');
@@ -30,7 +32,6 @@ Route::group(['middleware' => 'auth'], function (){
 	Route::post('/{username}/follow', 'UsersController@follow');
 	Route::post('/{username}/unfollow', 'UsersController@unfollow');
 	Route::get('/conversations/{conversation}', 'UsersController@showConversation');
-	Route::get('/api/notifications', 'UsersController@notifications');
 });
 
 Route::get('/api/messages/{message}/responses', 'MessagesController@responses');
