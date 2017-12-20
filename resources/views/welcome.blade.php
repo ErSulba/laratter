@@ -11,6 +11,7 @@
             </ul>
         </nav>
     </div>
+    <!-- ingresar MEnsaje-->
     <div class="row">
         <form action="/messages/create" method="post" enctype="multipart/form-data">
             <div class="form-group @if($errors->has('message')) has-danger @endif">
@@ -30,6 +31,9 @@
             </div>
         </form>
     </div>
+    <!-- ingreo de mensaje -->
+
+    <!-- Renderizado de mensajes -->
     <div class="row">
         @forelse($messages as $message)
             <div class="col-6">
@@ -44,4 +48,5 @@
         </div>
         @endif
     </div>
+    <!-- renderizado de mensajes-->
 @endsection
