@@ -16,4 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+// The Notifications for the user
 Route::get('/notifications', 'UsersController@notifications')->middleware('auth:api');
+
+//The messagers API
+Route::get('messages/{message}/responses', 'MessagesController@responses');
